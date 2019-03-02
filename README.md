@@ -2,9 +2,30 @@
 
 ## Section 2
 
+### Set up Express app
+
+- `npm install --save express` - install express
+
+```
+app.get("/", (req, res) => {
+  res.send({ bye: "buddy" });
+});
+```
+
+a route handler
+.get() is a request method
+req = request, res = response
+
 ### Run server on local machine
 
 - `node index.js`
+
+### Deployment Checklist
+
+- Dynamic Port Binding
+- Specify Node Environment
+- Specific start script
+- Create .gitignore file
 
 ### Initial Heroku deployment
 
@@ -26,3 +47,32 @@
 - `git push origin master` - push to github remote
 
 ## Section 3
+
+Will be using Passport JS library for OAuth. Will help handle the Server/Google interactions.
+
+There are two common complaints with Passport JS:
+
+- Requires us to reach into specific points in the flow and add a bit of code to make the steps work nicely; automates vast majority of OAuth flow, but not entire thing; we don't always have a good understanding of the flow
+- Inherent confusion in how library is configured; we are actually installing at least two different libraries: passport (core module) and passport strategies (helpers for authentication with one very specific method like email/password, Google, Facebook, etc); if you want to use three different sign-in methods, you will need to install three passport strategies
+
+### Install Passport
+
+- `npm install --save passport passport-google-oauth20` - install passport and google passport strategy
+
+> "oath20" is short for OAuth 2.0
+
+> Can no longer use wildcards (\*) so use this instead: http://localhost:5000/auth/google/callback
+
+console.developers.google.com -> create new project emaily-dev
+
+1. Enable the Google OAuth API -> search for google+ api (oauth shows no results) -> click Enable
+2. Create api credential - Click on Create Credentials -> want OAuth api, I chose Google+ API, Web Server, User Data, click button.
+
+**For Authorized JavaScript origins:** http://localhost:5000
+**Authorized redirect URIs:** http://localhost:5000/auth/google/callback
+
+The clientID is a public token. We can share this with the public.
+
+The clientSecret is a private token. We don't want to share this with the public.
+
+Add the clientID and clientSecret to a config/keys.js file and add it to .gitignore.
