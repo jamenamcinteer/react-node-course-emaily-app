@@ -5,7 +5,7 @@ const app = express();
 // .get() is a request method
 // req = request, res = response
 app.get("/", (req, res) => {
-  res.send({ hi: "there" });
+  res.send({ bye: "buddy" });
 });
 
 const PORT = process.env.PORT || 5000; // use environment variable in prod or 5000 on local
