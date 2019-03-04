@@ -12,8 +12,8 @@ app.get("/", (req, res) => {
 });
 ```
 
-a route handler
-.get() is a request method
+a route handler;
+.get() is a request method;
 req = request, res = response
 
 ### Run server on local machine
@@ -69,6 +69,7 @@ console.developers.google.com -> create new project emaily-dev
 2. Create api credential - Click on Create Credentials -> want OAuth api, I chose Google+ API, Web Server, User Data, click button.
 
 **For Authorized JavaScript origins:** http://localhost:5000
+
 **Authorized redirect URIs:** http://localhost:5000/auth/google/callback
 
 The clientID is a public token. We can share this with the public.
@@ -76,3 +77,36 @@ The clientID is a public token. We can share this with the public.
 The clientSecret is a private token. We don't want to share this with the public.
 
 Add the clientID and clientSecret to a config/keys.js file and add it to .gitignore.
+
+Google has a list of the different scopes that are allowed
+
+- `npm install --save nodemon` - install nodemon; allows us to not have to kill and restart the server after changes
+- `npm run dev` - run the server in development mode using nodemon
+
+## Section 4
+
+### File structure
+
+server
+
+- -- config -> Protection API keys and settings
+- -- routes -> All route handlers, grouped by purpose
+- -- services -> Helper modules and business logic
+- index.js
+
+`require("./routes/authRoutes")(app);`
+
+Is the same as:
+
+```
+const authRoutes = require("./routes/authRoutes");
+authRoutes(app);
+```
+
+HTTP is Stateless: Between any two given requests that we make, HTTP has no way to share information between two separate requests
+
+We will be using cookie-based authentication
+
+We will have a header inside response sent to browser "Set-Cookie"; token will uniquely identify the user. Browser will store token in memory and automatically append it in any request sent to server.
+
+This cookie-based approach has a couple of shortcomings compared to JSON-based web tokens.
