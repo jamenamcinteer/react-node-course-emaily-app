@@ -103,6 +103,8 @@ const authRoutes = require("./routes/authRoutes");
 authRoutes(app);
 ```
 
+### Overview of what we will be doing
+
 HTTP is Stateless: Between any two given requests that we make, HTTP has no way to share information between two separate requests
 
 We will be using cookie-based authentication
@@ -110,3 +112,51 @@ We will be using cookie-based authentication
 We will have a header inside response sent to browser "Set-Cookie"; token will uniquely identify the user. Browser will store token in memory and automatically append it in any request sent to server.
 
 This cookie-based approach has a couple of shortcomings compared to JSON-based web tokens.
+
+mongoose.js is an optional library used in this course, used to make our lives easier when working with MongoDB.
+
+### How Mongo Internally Stores Info
+
+Stores as records in collections in an instance. A collection (e.g. users) contains many records (individual users). Every record is a piece of JSON.
+
+Schemaless: inside a collection, every record can have its own distinct set of properties. This is in contrast to databases like SQL where there are defined set of properties.
+
+In the JS World (Express, NodeJS), we have two important concepts implemented by mongoose. We make use of a Model Class - it represents an entire MongoDB collection, used to access a single collection. Has a bunch of functions attached to it used to work with the collection.
+
+Mongoose also gives us access to Model Instances - JS objects that represent a single record inside a collection.
+
+One class is related to one collection, one instance is related to one instance.
+
+1.  Go to https://www.mongodb.com/cloud/atlas and click the "Start Free" button (or Sign In if you already have account)
+2.  Create your MongoDB user account
+3.  After creating your account, you will be prompted to create your first cluster.
+    Leave all free tier options selected - AWS, North America: N. Virginia etc.
+4.  Scroll down on this page to name your app:
+5.  Click the "Create Cluster" button:
+6.  The cluster will take a few minutes or more to generate, eventually you will see a page like this:
+7.  Click the "CONNECT" button in your cluster's sandbox. You will get the following screen asking you to whitelist your address.
+    Click the "Add your Current IP Address" button.
+8.  You will then need to create a database user and password. After doing so, click the "Create MongoDB User" button.
+9.  After creating the user, you should get this success dialog box. Click the "Choose a connection method" button.
+10. Select the "Short SRV connection String" and then copy the address it provides you.
+    You will need to replace <PASSWORD> with the database user's actual password created earlier when you paste into your application.
+    Click the "Close" button and head back over to your Emaily application.
+11. In your config/keys.js file create the mongoURI key value pair if you haven't already done so.
+    Remember the comma if adding in-between other key value pairs:
+    Add the connection string by pasting the entire SRV address string you copied in the screen before.
+    Remember to replace <PASSWORD> with the user's actual password.
+    Your root index.js connect function should still look like this:
+12. In a few lectures you will be testing adding users to your database cluster.
+    To see these results, navigate back to your cluster's dashboard and click the 'emaily' project link:
+13. Select the 'Collections' tab:
+14. You should see the collection of users and user objects that have successfully authenticated to your app:
+
+### Wire up mongoose
+
+`npm install --save mongoose`
+
+Deprecation warnings are being produced by mongoDB instance because of code in mongoose; until mongoose fixes it, there is nothing we can do to make the warning go away.
+
+Mongoose requires the properties to be defined (unlike MongoDB)
+
+We can freely add in and remove properties as we see fit
