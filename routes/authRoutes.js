@@ -17,5 +17,6 @@ module.exports = app => {
 
   app.get("/api/current_user", (req, res) => {
     res.send(req.user); // if logged out, req.user will be blank as will the screen
+    // req.session has data attempting to be sent to passport library
   });
 };
