@@ -160,3 +160,7 @@ Deprecation warnings are being produced by mongoDB instance because of code in m
 Mongoose requires the properties to be defined (unlike MongoDB)
 
 We can freely add in and remove properties as we see fit
+
+`npm install --save cookie-session` - to handle cookies
+
+middelwares pre-process request before sending to route handlers
