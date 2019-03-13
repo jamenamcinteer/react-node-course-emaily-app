@@ -164,3 +164,13 @@ We can freely add in and remove properties as we see fit
 `npm install --save cookie-session` - to handle cookies
 
 middelwares pre-process request before sending to route handlers
+
+### Client Side
+
+`npm install -g create-react-app` - install create-react-app globally
+
+`create-react-app client` - run this while in server directory
+
+`npm start` - run while in client directory
+
+Visit localhost:3000 to see the new react application. We have a second server running for our client development environment.
