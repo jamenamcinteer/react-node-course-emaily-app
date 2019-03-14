@@ -26,25 +26,15 @@ passport.use(
       callbackURL: "/auth/google/callback",
       proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
-      // console.log("access token", accessToken);
-      // console.log("refresh token", refreshToken);
-      // console.log("profile", profile);
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
 
-      // initiate a search over all records in collection
-      // returns a promise (async)
-      // findOne grabs an instance from the User collection
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          // we already have a record with the given profile id
-          done(null, existingUser); // first argument is error
-        } else {
-          // we don't have a user record with this ID, make a new record
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user)); // new instance of a user, then save to db
-        }
-      });
+      if (existingUser) {
+        return done(null, existingUser);
+      }
+
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
     }
   )
-); // new instance of google strategy, pass in config
+);

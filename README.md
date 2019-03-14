@@ -174,3 +174,121 @@ middelwares pre-process request before sending to route handlers
 `npm start` - run while in client directory
 
 Visit localhost:3000 to see the new react application. We have a second server running for our client development environment.
+
+`npm install --save concurrently`
+
+### Routing / Proxy
+
+Linking with relative link /auth/google, browser will assume the link is on the same proxy (localhost:3000) instead of (localhost:5000).
+
+Add setupProxy.js
+
+On heroku, there aren't separate server. Create react app is only used for local development and is static once it is built.
+
+### Async / Await (Refactoring Promises)
+
+New syntax for promises
+
+Write a function to retrieve a blob of json. Make an ajax request! Use the "fetch" js function.
+
+Endpoint: https://rallycoding.herokuapp.com/api/music_albums - arbitrary blob of json
+
+Fetch returns a promise; returns a response object. To work with the data, have to call res.json() that returns a promise of its own.
+
+Fetch works in modern browsers (not IE11)
+
+```
+function fetchAlbums() {
+    fetch("https://rallycoding.herokuapp.com/api/music_albums")
+        .then(res => res.json())
+        .then(json => console.log(json))
+}
+
+fetchAlbums();
+```
+
+ES2017 syntax makes it visually look like we are writing more synchronous code, does the same thing as promises. Is called Async / Await.
+
+```
+async function fetchAlbums() {
+    const res = await fetch("https://rallycoding.herokuapp.com/api/music_albums")
+    const json = await res.json()
+
+    console.log(json);
+}
+
+fetchAlbums();
+```
+
+Using arrow function:
+
+```
+const fetchAlbums = async () => {
+    const res = await fetch("https://rallycoding.herokuapp.com/api/music_albums")
+    const json = await res.json()
+
+    console.log(json);
+}
+
+fetchAlbums();
+```
+
+Old syntax of passport.js:
+
+```
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: "/auth/google/callback",
+      proxy: true
+    },
+    (accessToken, refreshToken, profile, done) => {
+      // initiate a search over all records in collection
+      // returns a promise (async)
+      // findOne grabs an instance from the User collection
+      User.findOne({ googleId: profile.id }).then(existingUser => {
+        if (existingUser) {
+          // we already have a record with the given profile id
+          done(null, existingUser); // first argument is error
+        } else {
+          // we don't have a user record with this ID, make a new record
+          new User({ googleId: profile.id })
+            .save()
+            .then(user => done(null, user)); // new instance of a user, then save to db
+        }
+      });
+    }
+  )
+); // new instance of google strategy, pass in config
+```
+
+New syntax:
+
+```
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: "/auth/google/callback",
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      // initiate a search over all records in collection
+      // returns a promise (async)
+      // findOne grabs an instance from the User collection
+      const existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        // we already have a record with the given profile id
+        done(null, existingUser); // first argument is error
+      } else {
+        // we don't have a user record with this ID, make a new record
+        const user = await new User({ googleId: profile.id }).save();
+        done(null, user); // new instance of a user, then save to db
+      }
+    }
+  )
+); // new instance of google strategy, pass in config
+```
