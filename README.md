@@ -292,3 +292,11 @@ passport.use(
   )
 ); // new instance of google strategy, pass in config
 ```
+
+### React Redux
+
+Provider is a component that makes the store accessible to every component in the app. App is immediate child of Provider.
+
+App.js is responsible for router setup.
+
+index.js is repsonsible for reducer setup.
