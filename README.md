@@ -302,3 +302,5 @@ App.js is responsible for router setup.
 index.js is repsonsible for reducer setup.
 
 BrowserRouter expects at most one child.
+
+In jsx, `exact={true}` is the same as `exact`
