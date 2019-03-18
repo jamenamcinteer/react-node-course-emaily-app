@@ -317,6 +317,8 @@ React Component -> Calls an Action Creator -> Returns an Action -> Sent to reduc
 
 Axios - to make ajax requests
 
-Thunk
+Thunk - allows us to write action creators that break the requirement that we have to immediately return ac action from every action creator we create. Gives us direct access to the dispatch function (sending an action to reducers).
 
 `npm install --save axios redux-thunk` in client
+
+We want to dispatch an action once the api request has been completed
