@@ -304,3 +304,9 @@ index.js is repsonsible for reducer setup.
 BrowserRouter expects at most one child.
 
 In jsx, `exact={true}` is the same as `exact`
+
+### Materialize CSS
+
+`npm install --save materialize-css`
+
+Making use of webpack module that came with create react app. Webpack is a module loader.
