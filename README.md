@@ -310,3 +310,7 @@ In jsx, `exact={true}` is the same as `exact`
 `npm install --save materialize-css`
 
 Making use of webpack module that came with create react app. Webpack is a module loader.
+
+### Current User API
+
+React Component -> Calls an Action Creator -> Returns an Action -> Sent to reducers -> Updates state in store -> State sent back to components, causing them to render
