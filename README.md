@@ -300,3 +300,5 @@ Provider is a component that makes the store accessible to every component in th
 App.js is responsible for router setup.
 
 index.js is repsonsible for reducer setup.
+
+BrowserRouter expects at most one child.
