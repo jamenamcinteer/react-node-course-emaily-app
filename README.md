@@ -322,3 +322,5 @@ Thunk - allows us to write action creators that break the requirement that we ha
 `npm install --save axios redux-thunk` in client
 
 We want to dispatch an action once the api request has been completed
+
+Refactor App component from functional to class for access to lifecycle method on render (componentDidMount())
