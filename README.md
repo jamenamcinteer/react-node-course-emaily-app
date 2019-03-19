@@ -324,3 +324,9 @@ Thunk - allows us to write action creators that break the requirement that we ha
 We want to dispatch an action once the api request has been completed
 
 Refactor App component from functional to class for access to lifecycle method on render (componentDidMount())
+
+Import connect to give certain components access to action creators
+
+`import * as actions from "../actions"` - Get all actions defined in actions file and assign to actions object
+
+`export default connect(null, actions)(App)` - mapStateToProps is null; second argument is normally mapDispatchToProps, which is the same as the actions object in this case. Can be accessed by, for example, `this.props.fetchUser()` without the need of a mapDispatchToProps method
