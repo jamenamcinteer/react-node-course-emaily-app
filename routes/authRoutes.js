@@ -18,7 +18,8 @@ module.exports = app => {
 
   app.get("/api/logout", (req, res) => {
     req.logout(); // takes the cookie with id and kills it
-    res.send(req.user); // give response back to the user, response is empty because req.user is empty
+    // res.send(req.user); // give response back to the user, response is empty because req.user is empty
+    res.redirect("/");
   });
 
   app.get("/api/current_user", (req, res) => {
