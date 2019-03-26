@@ -393,3 +393,5 @@ recipients: [String]
 ```
 
 This communicates to mongoose that recipients will be an array of strings.
+
+We will embed a sub-document collection in recipients.
