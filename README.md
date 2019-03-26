@@ -385,3 +385,11 @@ export const fetchUser = () => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res });
 };
 ```
+
+### Mongoose for Survey Creation
+
+```
+recipients: [String]
+```
+
+This communicates to mongoose that recipients will be an array of strings.
