@@ -405,3 +405,9 @@ _user: { type: Schema.Types.ObjectId, ref: "User" }
 ```
 
 Every survey is going to belong to a particular user. \_user will be id of user who owns record. Ref of "User" refers to User collection. Underscore is not required, this is a convention that indicates that it is a reference field.
+
+Add middleware as arguments in the order they should run
+
+```
+app.post("/api/surveys", requireLogin, requireCredits, (req, res) => {
+```
