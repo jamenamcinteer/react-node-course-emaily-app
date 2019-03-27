@@ -399,3 +399,9 @@ We will embed a sub-document collection in recipients.
 Why not nest surveys under users like recipients are under surveys? In Mongo world, we refer to each item in a collection as a document. Mongo size limit for a single record is 4 MB. Survey and all data inside of it can only be 4 MB large. An email address is ~20 bytes large. Multiply x200,000 = ~4 MB. A single survey can only store about 200,000 email addresses. If every user's list of surveys were stored under users, the user would be limited to 200,000 recipients, rather than the survey. This could cause big bugs.
 
 Recipients will now be an array of RecipientSchema records.
+
+```
+_user: { type: Schema.Types.ObjectId, ref: "User" }
+```
+
+Every survey is going to belong to a particular user. \_user will be id of user who owns record. Ref of "User" refers to User collection. Underscore is not required, this is a convention that indicates that it is a reference field.
