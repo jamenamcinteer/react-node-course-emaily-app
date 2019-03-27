@@ -411,3 +411,9 @@ Add middleware as arguments in the order they should run
 ```
 app.post("/api/surveys", requireLogin, requireCredits, (req, res) => {
 ```
+
+`req.body` is body of the request posted to our api
+
+We could require Survey.js model, but could cause issues with tests when requiring it multiple times, so we use mongoose instead.
+
+`const Survey = mongoose.model("surveys");`
