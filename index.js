@@ -22,6 +22,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require("./routes/authRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 const PORT = process.env.PORT || 5000; // use environment variable in prod or 5000 on local
 app.listen(PORT);
