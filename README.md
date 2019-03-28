@@ -417,3 +417,9 @@ app.post("/api/surveys", requireLogin, requireCredits, (req, res) => {
 We could require Survey.js model, but could cause issues with tests when requiring it multiple times, so we use mongoose instead.
 
 `const Survey = mongoose.model("surveys");`
+
+sendgrid.com - email provider
+
+webhook - external api that sends back some kind of callback
+
+`npm install --save sendgrid`
