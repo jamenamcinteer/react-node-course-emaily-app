@@ -423,3 +423,5 @@ sendgrid.com - email provider
 webhook - external api that sends back some kind of callback
 
 `npm install --save sendgrid`
+
+Whenever we call new class, the first function called automatically is constructor()
