@@ -9,6 +9,7 @@ import App from "./components/App";
 import reducers from "./reducers";
 
 // Temporary to test back end route that requires auth
+// Development only axios helpers
 import axios from "axios";
 window.axios = axios;
 
